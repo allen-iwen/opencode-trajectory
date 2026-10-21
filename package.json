@@ -1,0 +1,69 @@
+{
+  "name": "opencode-trajectory",
+  "version": "0.1.0",
+  "description": "Append-only trajectory recorder and viewer for OpenCode agent sessions — every message, tool call, payload, token and timing, replayable offline.",
+  "type": "module",
+  "license": "MIT",
+  "author": "allen-iwen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allen-iwen/opencode-trajectory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/allen-iwen/opencode-trajectory/issues"
+  },
+  "homepage": "https://github.com/allen-iwen/opencode-trajectory#readme",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "bin": {
+    "opencode-trajectory": "./bin/cli.mjs",
+    "traj": "./bin/traj.mjs"
+  },
+  "files": [
+    "src",
+    "bin",
+    "viewer",
+    "dist",
+    "README.md",
+    "README.zh-CN.md",
+    "INTEGRATION.md"
+  ],
+  "scripts": {
+    "test": "node --test test/normalize.test.mjs test/store.test.mjs test/viewer.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "install-plugin": "node scripts/install.mjs",
+    "demo": "node scripts/demo.mjs",
+    "view": "node bin/cli.mjs serve",
+    "export": "node bin/cli.mjs export",
+    "pack": "node scripts/pack.mjs"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "trajectory",
+    "observability",
+    "agent",
+    "tracing"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@opencode-ai/plugin": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.18.26",
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "jsdom": "^30.1.3",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# local opencode config + recorded journals (contain real keys / project data)
+.opencode/
+
+# generated exports, screenshots, staging, packages
+out/
+.pack-staging/
+*.log
+
+# os
+Thumbs.db
+.DS_Store
+
+# local agent workspace notes
+.workbuddy/
