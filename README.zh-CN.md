@@ -61,6 +61,10 @@ chat.message   // 用户回合的权威时点（带稳定 messageID，避免与 
 
 ## 3. 安装
 
+> **仅支持 OpenCode v1。** 本插件基于 v1 插件 API（`@opencode-ai/plugin >= 1.4.0`，返回 hooks 对象、含 `event` 钩子）。
+> OpenCode v2 换成了另一套插件 API（`@opencode/plugin`，`Plugin.define` + 命令式 `setup`、`ctx.event.subscribe()` 异步流），
+> 本插件**尚未移植**，在 v2 下按原样加载不工作。移植是独立的一摊活。
+
 ### 方式 A：本地插件（推荐，零构建）
 
 ```bash

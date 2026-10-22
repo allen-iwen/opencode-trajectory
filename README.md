@@ -65,6 +65,11 @@ chat.message   // authoritative user-turn timing (stable messageID, dedup vs. ev
 
 Requires Node 18+ and OpenCode 1.18+.
 
+> **OpenCode v1 only.** This plugin is built against the v1 plugin API (`@opencode-ai/plugin >= 1.4.0`,
+> hooks object with `event`). OpenCode v2 ships a different plugin API (`@opencode/plugin`, `Plugin.define`
+> with an imperative `setup`, `ctx.event.subscribe()` as an async iterable) and this plugin has **not** been
+> ported to it — it will not load there as-is. Porting is tracked as separate work.
+
 ```bash
 # global: applies to every opencode instance on this machine
 node scripts/install.mjs
