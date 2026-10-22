@@ -80,15 +80,20 @@ for (const f of files) {
   fs.copyFileSync(src, dst)
 }
 
-// zip via Windows built-in bsdtar (C:\Windows\System32\tar.exe, available on Win10+).
-// Use the absolute path: Git Bash's GNU tar shadows it and cannot write zip.
-try {
-  execFileSync("C:\\Windows\\System32\\tar.exe", ["-a", "-c", "-f", zipPath, "-C", stage, "opencode-trajectory"], { stdio: "inherit" })
-} catch {
-  execFileSync("powershell", [
-    "-NoProfile", "-Command",
-    `Compress-Archive -Path '${pkgDir}' -DestinationPath '${zipPath}' -Force`,
-  ], { stdio: "inherit" })
+// zip: Windows uses built-in bsdtar (C:\Windows\System32\tar.exe, Win10+).
+// Use the absolute path there: Git Bash's GNU tar shadows it and cannot write zip.
+// POSIX (CI / Linux / macOS) uses the standard `zip`.
+if (process.platform === "win32") {
+  try {
+    execFileSync("C:\\Windows\\System32\\tar.exe", ["-a", "-c", "-f", zipPath, "-C", stage, "opencode-trajectory"], { stdio: "inherit" })
+  } catch {
+    execFileSync("powershell", [
+      "-NoProfile", "-Command",
+      `Compress-Archive -Path '${pkgDir}' -DestinationPath '${zipPath}' -Force`,
+    ], { stdio: "inherit" })
+  }
+} else {
+  execFileSync("zip", ["-r", "-q", zipPath, "opencode-trajectory"], { cwd: stage, stdio: "inherit" })
 }
 
 fs.rmSync(stage, { recursive: true, force: true })
